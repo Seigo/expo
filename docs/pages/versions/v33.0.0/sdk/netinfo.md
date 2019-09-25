@@ -23,18 +23,17 @@ import NetInfo from '@react-native-community/netinfo';
 If you want to grab information about the network connection just once, you can use:
 
 ```js
-NetInfo.fetch().then(state => {
-  console.log('Connection type', state.type);
-  console.log('Is connected?', state.isConnected);
+NetInfo.isConnected.fetch().then(isConnected => {
+  console.log('isConnected', isConnected);
 });
 ```
 
 Or, if you'd rather subscribe to updates about the network state (which then allows you to run code/perform actions anytime the network state changes) use:
 
 ```js
-const unsubscribe = NetInfo.addEventListener(state => {
-  console.log('Connection type', state.type);
-  console.log('Is connected?', state.isConnected);
+const unsubscribe = NetInfo.addEventListener('connectionChange', state => {
+  console.log('Type', state.type);
+  console.log('EffectiveType', state.effectiveType);
 });
 
 // To unsubscribe to these update, just use:
